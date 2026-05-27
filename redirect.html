@@ -3,58 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>地域通貨アプリへ移動中</title>
+    <title>ポイント受け取りページ</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             background-color: #f7f9fa;
             color: #333;
         }
         .container {
-            max-width: 400px;
+            max-width: 450px;
             margin: 0 auto;
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
         }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+        h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2c3e50;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .btn {
+        .description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        /* 画像ボタンを配置するリンクエリア */
+        .btn-link {
             display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 12px 24px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            cursor: pointer;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-top: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            -webkit-tap-highlight-color: transparent;
         }
-        .note { font-size: 12px; color: #777; margin-top: 15px; }
+        .btn-link:hover {
+            transform: scale(1.02);
+        }
+        .btn-link:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        /* button.png のスタイル定義 */
+        .coupon-img {
+            width: 100%;
+            max-width: 360px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .note {
+            font-size: 12px;
+            color: #888;
+            margin-top: 25px;
+            text-align: left;
+            line-height: 1.6;
+            background: #fdfdfd;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>アプリを起動しています</h2>
-    <p>自動的に地域通貨アプリに遷移します。しばらくお待ちください。</p>
+    <h2>ポイントプレゼント！</h2>
+    <p class="description">下のボタンをタップすると、地域通貨アプリが起動してポイントが付与されます。</p>
     
-    <div class="spinner" id="spinner"></div>
-
-    <a href="#" id="app-link" class="btn">アプリを開く</a>
+    <a href="#" id="app-link" class="btn-link">
+        <img src="button.png" alt="3,000ポイントプレゼント！" class="coupon-img">
+    </a>
     
-    <p class="note">※アプリが起動しない場合は、上のボタンをタップするか、標準ブラウザで開き直してください。</p>
+    <div class="note">
+        ※ ボタンをタップしてもアプリが開かない場合は、以下の方法をお試しください。<br>
+        ・LINEの場合：右上の「✕」の横にあるメニューアイコンから「デフォルトのブラウザで開く」を選択してください。<br>
+        ・その他の場合：Safari や Chrome などの標準ブラウザでこのページを開き直してください。
+    </div>
 </div>
 
 <script src="app-redirect.js"></script>
