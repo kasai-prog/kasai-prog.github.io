@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1DQTDC6WP2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1DQTDC6WP2');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>ねっぴ～Pay3000ポイント受け取りページ</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f7f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            background: white;
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        .navigation {
+            font-size: 18px;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        /* 画像ボタンを配置するリンクエリア */
+        .btn-link {
+            display: inline-block;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn-link:hover {
+            transform: scale(1.02);
+        }
+        .btn-link:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        /* button.png のスタイル定義 */
+        .coupon-img {
+            width: 100%;
+            max-width: 360px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .note {
+            font-size: 13px;
+            color: #888;
+            margin-top: 25px;
+            text-align: left;
+            line-height: 1.6;
+            background: #fdfdfd;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>ねっぴ～Pay「3000ポイント」プレゼント！</h2>
+    <p class="description">下のボタンをタップすると、ねっぴ～Payアプリが起動して3000ポイントが付与されます。</p>
+    <p class="navigation">↓をタップ<br>
+    <a href="https://api.yomsubi.com/kasai/4d224a5a1cd9281534a86032eb9b4649?tm=8wnvN4lBoTaWDUZIjL9kMtzpf563" id="app-link">
+        <img src="button.png" alt="3,000ポイントプレゼント！" class="coupon-img">
+    </a>
+    </p>
+    <div class="note">
+        ※ ボタンをタップしてもアプリが開かない場合は、以下の方法をお試しください。<br>
+        ・LINEの場合：右上の「✕」の横にあるメニューアイコンから「デフォルトのブラウザで開く」を選択してください。<br>
+        ・その他の場合：Safari や Chrome などの標準ブラウザでこのページを開き直してください。<br>
+        ※ ポイントの付与はおひとり様1回のみとなります。<br>
+        ※ ねっぴ～Payで二段階認証が設定されていないとポイントは受け取れません。
+    </div>
+</div>
+
+
+</body>
+</html>
