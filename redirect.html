@@ -82,7 +82,33 @@
             border-radius: 8px;
             border: 1px solid #eee;
         }
-
+        /* 初期状態ではらくらくスマホ用ボタンを隠す */
+        #rakuraku-area {
+            display: none;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 3px dashed #dc3545;
+            background-color: #fff8f8;
+            padding: 15px;
+            border-radius: 12px;
+        }
+        .rakuraku-title {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .btn-warning {
+            display: block;
+            background-color: #ffc107;
+            color: #212529;
+            padding: 18px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -103,8 +129,26 @@
         ※ ねっぴ～Payで二段階認証が設定されていないとポイントは受け取れません。
     </div>
 </div>
+<div id="rakuraku-area">
+            <div class="rakuraku-title">⚠️ らくらくスマホ等で進まない方へ</div>
+            <p class="desc" style="font-size: 14px; text-align: left;">
+                上のねっぴ～のボタンを押しても画面が進まない場合は、お使いのブラウザが対応していません。<br><br>
+                下の黄色いボタンを押して、一度**【インターネット（Chrome）】**を開き直してから、もう一度お試しください。
+            </p>
+            <a href="intent://api.yomsubi.com/kasai/4d224a5a1cd9281534a86032eb9b4649?tm=8wnvN4lBoTaWDUZIjL9kMtzpf563#Intent;scheme=https;package=com.android.chrome;end;" class="btn-warning">
+                🟡 インターネット(Chrome)で開く
+            </a>
+        </div>
+    
+    <script>
+        // Android端末（らくらくスマホ含む）のときだけ、下の黄色いボタンエリアを表示する
+        const ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf("android") > -1) {
+            document.getElementById('rakuraku-area').style.display = 'block';
+        }
+    </script>
 
-<script src="app-redirect.js"></script>
+    <script src="app-redirect.js"></script>
 
 </body>
 </html>
