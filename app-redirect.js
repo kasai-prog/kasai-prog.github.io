@@ -10,49 +10,55 @@
         return decodeURIComponent(escape(window.atob(base64Str)));
     };
 
-    // ページ読み込み完了時の処理
     window.addEventListener('DOMContentLoaded', () => {
         const appLinkBtn = document.getElementById('app-link');
         if (!appLinkBtn) return;
-
-        // 本来の遷移先URLを復元
-        const baseUrl = getDecodedUrl(BASE64_UNIVERSAL_LINK);
-        
-        // 遷移先URLに現在のクエリパラメータを綺麗に結合する処理
-        let targetUrl = baseUrl;
-        if (currentQuery) {
-            const separator = baseUrl.indexOf('?') !== -1 ? '&' : '?';
-            targetUrl += separator + currentQuery.substring(1);
-        }
 
         // ユーザーの環境（OS）を確認
         const ua = navigator.userAgent.toLowerCase();
         const isAndroid = ua.indexOf("android") > -1;
 
         if (isAndroid) {
-            // URLから「https://」を取り除いたドメイン＋パス部分を取り出します
-            const rawUrlWithoutProtocol = targetUrl.replace(/^https?:\/\//, '');
-            const intentUrl = `intent://${rawUrlWithoutProtocol}#Intent;scheme=https;package=com.android.chrome;end;`;
-
-            // ボタンのリンク先に、Chrome経由でアプリを開く特殊なURL（Intent）を設定
-            appLinkBtn.href = intentUrl;
-
-            // 【超重要：らくらくスマホ対策】
-            // もし「らくらくブラウザ」やLINE内ブラウザなどの通常Chrome以外の環境でこのページを開いていた場合、
-            // ユーザーが「ボタンを押した瞬間」に、強制的に通常のGoogle Chromeを召喚してアプリを開くようにイベントを設定します。
             const isChrome = ua.indexOf("chrome") > -1 && ua.indexOf("chromium") === -1;
+
             if (!isChrome) {
+                // 【A】らくらくブラウザやLINEなどの通常Chrome以外の環境の場合：
+                // ボタンの「見た目のリンク先（href）」を、このリダイレクトページ自身をChromeで開く設定にする。
+                // これにより、長押しされてもアプリのURLは絶対にバレず、タップした瞬間に確実にChromeへ脱出させます。
+                const currentUrl = window.location.href.replace(/^https?:\/\//, "");
+                appLinkBtn.href = `intent://${currentUrl}#Intent;scheme=https;package=com.android.chrome;end;`;
+
+            } else {
+                // 【B】すでに通常のGoogle Chromeに到達している場合：
+                // HTML上のhrefは安全のために「#」のままにしておき、クリックされた瞬間にアプリを起動します。
+                appLinkBtn.href = "#";
                 appLinkBtn.addEventListener('click', (e) => {
-                    e.preventDefault(); // 通常のクリック挙動を一瞬止める
-                    const currentUrl = window.location.href.replace(/^https?:\/\//, "");
-                    // 一度通常のChromeでこのページを開き直させます。開き直されたChromeで再度ボタンを押せば確実にアプリが開きます。
-                    window.location.href = `intent://${currentUrl}#Intent;scheme=https;package=com.android.chrome;end;`;
+                    e.preventDefault();
+                    const baseUrl = getDecodedUrl(BASE64_UNIVERSAL_LINK);
+                    let targetUrl = baseUrl;
+                    if (currentQuery) {
+                        const separator = baseUrl.indexOf('?') !== -1 ? '&' : '?';
+                        targetUrl += separator + currentQuery.substring(1);
+                    }
+                    const rawUrlWithoutProtocol = targetUrl.replace(/^https?:\/\//, '');
+                    window.location.href = `intent://${rawUrlWithoutProtocol}#Intent;scheme=https;package=com.android.chrome;end;`;
                 });
             }
 
         } else {
-            // 【iOS対策】iPhoneの場合は通常のユニバーサルリンクをボタンに設定
-            appLinkBtn.href = targetUrl;
+            // 【C】iPhone（iOS）の場合：
+            // HTML上のhrefは「#」のままにしておき、クリックされた瞬間にユニバーサルリンクへジャンプ
+            appLinkBtn.href = "#";
+            appLinkBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const baseUrl = getDecodedUrl(BASE64_UNIVERSAL_LINK);
+                let targetUrl = baseUrl;
+                if (currentQuery) {
+                    const separator = baseUrl.indexOf('?') !== -1 ? '&' : '?';
+                    targetUrl += separator + currentQuery.substring(1);
+                }
+                window.location.href = targetUrl;
+            });
         }
     });
 })();
